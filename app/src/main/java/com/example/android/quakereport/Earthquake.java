@@ -6,12 +6,14 @@ public class Earthquake {
     private String mDate;
     private String mTime;
     private long mMag;
+    private String mURL;
 
-    public Earthquake(String location, String date, String time, long mag){
+    public Earthquake(String location, String date, String time, long mag, String url){
         mLocation = location;
         mDate = date;
         mTime = time;
         mMag = mag;
+        mURL = url;
     }
 
     public String getLocation() {
@@ -28,5 +30,9 @@ public class Earthquake {
 
     public long getMag() {
         return mMag;
+    }
+
+    public String getURL() {
+        return mURL;
     }
 }

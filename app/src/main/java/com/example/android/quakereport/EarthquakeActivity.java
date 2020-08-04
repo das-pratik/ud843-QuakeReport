@@ -15,9 +15,13 @@
  */
 package com.example.android.quakereport;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -46,7 +50,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         */
 
         //Get list of earthquake locations from QueryUtils JSON parse
-        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
+        final ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
 
         //Debug message
         //Log.d("EarthquakeActivity", "the 4th element is location:" + earthquakes.get(3).getLocation() +
@@ -63,5 +67,14 @@ public class EarthquakeActivity extends AppCompatActivity {
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(adapter);
+
+        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(earthquakes.get(i).getURL()));
+                startActivity(intent);
+            }
+        });
     }
 }
